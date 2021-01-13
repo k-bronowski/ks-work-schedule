@@ -11,15 +11,15 @@ import { AppModule } from './app/app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const globalPrefix = 'api';
+  const globalPrefix = '';
   app.setGlobalPrefix(globalPrefix);
   const port = process.env.PORT || 3333;
 
   const options = new DocumentBuilder()
-    .setTitle('Cats example')
-    .setDescription('The cats API description')
+    .setTitle('KS Work Schedule API')
+    .setDescription('The KS Work Schedule API description')
     .setVersion('1.0')
-    .addTag('cats')
+    .addTag('employees')
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('swagger', app, document);
