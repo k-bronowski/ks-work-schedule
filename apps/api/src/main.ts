@@ -11,7 +11,7 @@ import { AppModule } from './app/app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const globalPrefix = '';
+  const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
   const port = process.env.PORT || 3333;
 
@@ -19,10 +19,11 @@ async function bootstrap() {
     .setTitle('KS Work Schedule API')
     .setDescription('The KS Work Schedule API description')
     .setVersion('1.0')
+    .addBearerAuth()
     .addTag('employees')
     .build();
   const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('swagger', app, document);
+  SwaggerModule.setup(globalPrefix, app, document);
 
   await app.listen(port, () => {
     Logger.log('Listening at http://localhost:' + port + '/' + globalPrefix);

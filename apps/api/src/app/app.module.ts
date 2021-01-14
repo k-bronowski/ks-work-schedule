@@ -1,16 +1,16 @@
-import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { FrontendMiddleware } from './frontend.middleware';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
-  imports: [],
+  imports: [ServeStaticModule.forRoot({
+    rootPath: join(__dirname, '..', 'frontend')
+  })],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(FrontendMiddleware).forRoutes({ path: '/', method: RequestMethod.ALL })
-  }
 }
