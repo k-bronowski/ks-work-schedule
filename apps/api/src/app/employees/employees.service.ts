@@ -13,9 +13,11 @@ export class EmployeesService {
   ) { }
 
   async create(createEmployeeDto: CreateEmployeeDto) {
-    const result = await this.usersRepository.insert(createEmployeeDto);
-    const id = result.identifiers[0].id;
-    return this.findOne(id);
+    return this.usersRepository.save(createEmployeeDto);
+
+    // const result = await this.usersRepository.insert(createEmployeeDto);
+    // const id = result.identifiers[0].id;
+    // return this.findOne(id);
   }
 
   findAll() {
@@ -32,5 +34,9 @@ export class EmployeesService {
 
   async remove(id: number) {
     await this.usersRepository.delete(id);
+  }
+
+  findOneByLogin(login: string) {
+    return this.usersRepository.findOne({ login });
   }
 }
