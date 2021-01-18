@@ -1,3 +1,4 @@
+import { AuthData, User } from '@ks-work-schedule/models';
 import { Module, SetMetadata } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { ServeStaticModule } from '@nestjs/serve-static';
@@ -20,11 +21,11 @@ import { Employee } from './employees/entities/employee.entity';
       username: 'ksdb_user',
       password: 'ksdb_user_pass',
       database: 'ksdb',
-      entities: [Employee],
+      entities: [Employee, User, AuthData],
       synchronize: true,
     }),
     EmployeesModule,
-    AuthModule
+    AuthModule,
   ],
   controllers: [],
   providers: [{

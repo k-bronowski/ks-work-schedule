@@ -1,26 +1,30 @@
+import { AuthData, User } from '@ks-work-schedule/models';
 import { Injectable } from '@nestjs/common';
-import { EmployeesService } from '../employees/employees.service';
 import { JwtService } from '@nestjs/jwt';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { Employee } from '../employees/entities/employee.entity';
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private employeeService: EmployeesService,
+    @InjectRepository(AuthData)
+    private authRepository: Repository<AuthData>,
+    private userService: UsersService,
     private jwtService: JwtService,
   ) { }
 
-  async validateUser(login: string, pass: string) {
-    const user = await this.employeeService.findOneByLogin(login);
-    if (user && user.password === pass) {
-      const { password, ...result } = user;
-      return result;
+  async validateUser(username: string, pass: string) {
+    const authData = await this.authRepository.findOne(username);
+    if (authData && authData.password === pass) {
+      return this.userService.findOne(username);
     }
     return null;
   }
 
-  async login(user: Employee) {
-    const payload = { username: user.login, sub: user.id };
+  async login(user: User) {
+    const payload = { username: user.username };
     return { access_token: this.jwtService.sign(payload) }
   }
 }

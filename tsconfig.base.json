@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ks-work-schedule/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@ks-work-schedule/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@ks-work-schedule/models": ["libs/models/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

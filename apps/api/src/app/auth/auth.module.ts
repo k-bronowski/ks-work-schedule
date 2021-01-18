@@ -7,14 +7,19 @@ import { LocalStrategy } from './local.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 import { JwtStrategy } from './jwt.strategy';
+import { UsersModule } from '../users/users.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthData } from '@ks-work-schedule/models';
 
 @Module({
   imports: [
+    TypeOrmModule.forFeature([AuthData]),
     EmployeesModule,
+    UsersModule,
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '60s' }
+      signOptions: { expiresIn: '60m' }
     }),
   ],
   controllers: [
