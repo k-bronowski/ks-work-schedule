@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay, tap, catchError, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { User } from '@ks-work-schedule/models';
 
 export interface LoginUserResult {
   loginSuccess: boolean;
@@ -34,6 +35,12 @@ export class ApiClientService {
           return { loginSuccess: true, accessToken: result.access_token }
         }
       })
+    )
+  }
+
+  getUserProfile(): Observable<User> {
+    return this.httpClient.get('/api/profile').pipe(
+      map((result) => result as User)
     )
   }
 }

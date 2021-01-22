@@ -25,6 +25,16 @@ const reducer = createReducer(
   on(
     Actions.loginUserError,
     (state) => ({ ...state, loginUser: false, unauthorized: true })
+  ),
+
+  on(
+    Actions.getUserProfile,
+    (state) => ({ ...state, userProfile: null })
+  ),
+
+  on(
+    Actions.getUserProfileSuccess,
+    (state, { userProfile }) => ({ ...state, userProfile })
   )
 )
 

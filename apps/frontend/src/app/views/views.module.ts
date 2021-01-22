@@ -5,10 +5,11 @@ import { LoginViewComponent } from './login-view/login-view.component';
 import { CalendarViewComponent } from './calendar-view/calendar-view.component';
 import { ComponentsModule } from '../components/components.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { IndexViewComponent } from './index-view/index-view.component';
 
 
 @NgModule({
-  declarations: [LoginViewComponent, CalendarViewComponent],
+  declarations: [LoginViewComponent, CalendarViewComponent, IndexViewComponent],
   imports: [
     CommonModule,
     ViewsRoutingModule,

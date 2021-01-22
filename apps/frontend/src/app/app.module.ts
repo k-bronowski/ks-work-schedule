@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { ViewsModule } from './views/views.module';
 import { RouterModule } from '@angular/router';
-import { StoreModule } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { appReducer } from './store/reducers';
@@ -14,6 +14,9 @@ import { ServicesModule } from './services/services.module';
 import { Effects } from './store/effects';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
+import { UserDataService } from './services/user-data.service';
+import { State } from './store/state';
+import { loginUserSuccess } from './store/actions';
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,4 +36,12 @@ import { AuthInterceptor } from './auth.interceptor';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private userDataService: UserDataService, private store: Store<State>) {
+    const accessToken = userDataService.restoreAuthToken();
+    if (accessToken)
+      this.store.dispatch(loginUserSuccess({ accessToken }))
+    console.error('Dorobić automatyczne logowanie jeśli token jest nieważny....');
+    console.log('token', accessToken);
+  }
+}

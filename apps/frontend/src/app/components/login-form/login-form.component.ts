@@ -6,6 +6,7 @@ import * as Selectors from '../../store/selectors';
 import { Subscription } from 'rxjs';
 import { filter, first } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { UserDataService } from '../../services/user-data.service';
 
 @Component({
   selector: 'ks-work-schedule-login-form',
@@ -15,7 +16,11 @@ import { Router } from '@angular/router';
 })
 export class LoginFormComponent implements OnDestroy {
 
-  constructor(private store: Store<State>, private router: Router) { }
+  constructor(
+    private store: Store<State>,
+    private router: Router,
+    private userDataService: UserDataService
+  ) { }
 
   username: string;
   password: string;
@@ -37,9 +42,12 @@ export class LoginFormComponent implements OnDestroy {
     this.subscription.unsubscribe();
     this.store.dispatch(Actions.loginUser({ username: this.username, password: this.password }));
     setTimeout(() => {
-      this.store.select(Selectors.isUserLogged$).pipe(
-        filter(at => at),
-        first()).subscribe(() => this.router.navigate(['/']))
+      this.store.select(Selectors.accessToken$).pipe(
+        filter(at => !!at),
+        first()).subscribe((accesToken) => {
+          this.userDataService.storeAuthToken(accesToken);
+          this.router.navigate(['/'])
+        })
     }, 0);
 
   }

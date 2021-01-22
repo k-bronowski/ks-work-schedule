@@ -18,4 +18,10 @@ export class Effects {
     map(({ loginSuccess, accessToken }) => loginSuccess ? AppActions.loginUserSuccess({ accessToken }) : AppActions.loginUserError())
   ));
 
+  getUserProfileEffect$ = createEffect(() => this.actions$.pipe(
+    ofType(AppActions.getUserProfile),
+    switchMap(() => this.apiClient.getUserProfile()),
+    map(userProfile => AppActions.getUserProfileSuccess({ userProfile }))
+  ));
+
 }
