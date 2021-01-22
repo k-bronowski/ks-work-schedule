@@ -2,16 +2,16 @@
 
   <mat-form-field>
     <mat-label>Identyfikator użytkownika</mat-label>
-    <input type="text" matInput>
+    <input type="text" matInput [(ngModel)]="username" required>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Hasło</mat-label>
-    <input type="password" matInput>
+    <input type="password" matInput [(ngModel)]="password" requred>
   </mat-form-field>
 
   <div fxLayout="row" fxLayoutAlign="end center">
-    <button typ="button" mat-raised-button>Zaloguj</button>
+    <button typ="button" mat-raised-button [disabled]="buttonDisabled" (click)="loginUser()">Zaloguj</button>
   </div>
 
 </div>

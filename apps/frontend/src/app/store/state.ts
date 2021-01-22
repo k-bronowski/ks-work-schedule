@@ -2,6 +2,8 @@ import { User } from '@ks-work-schedule/models';
 
 
 export interface State {
-  authToken: string;
+  accessToken: string;
   userProfile: User;
+  loginUser: boolean;
+  loginUserError: boolean;
 }

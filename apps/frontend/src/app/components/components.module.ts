@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AppMaterialModule } from '../app-material/app-material.module';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -11,7 +12,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   imports: [
     CommonModule,
     AppMaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    FormsModule
   ],
   exports: [LoginFormComponent]
 })
