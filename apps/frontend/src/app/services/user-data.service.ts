@@ -12,4 +12,8 @@ export class UserDataService {
   restoreAuthToken() {
     return localStorage.getItem('ksScheduler_AuthToken') as string;
   }
+
+  removeAuthToken() {
+    localStorage.removeItem('ksScheduler_AuthToken');
+  }
 }

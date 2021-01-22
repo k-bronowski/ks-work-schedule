@@ -28,6 +28,11 @@ const reducer = createReducer(
   ),
 
   on(
+    Actions.logoutUser,
+    (state) => ({ ...state, accessToken: null })
+  ),
+
+  on(
     Actions.getUserProfile,
     (state) => ({ ...state, userProfile: null })
   ),
