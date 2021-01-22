@@ -6,7 +6,7 @@ const initialState: State = {
   accessToken: null,
   userProfile: null,
   loginUser: false,
-  loginUserError: false
+  unauthorized: false
 }
 
 const reducer = createReducer(
@@ -14,17 +14,17 @@ const reducer = createReducer(
 
   on(
     Actions.loginUser,
-    state => ({ ...state, loginUser: true, loginUserError: false, accessToken: null, userProfile: null })
+    state => ({ ...state, loginUser: true, unauthorized: false, accessToken: null, userProfile: null })
   ),
 
   on(
     Actions.loginUserSuccess,
-    (state, { accessToken }) => ({ ...state, loginUser: false, accessToken })
+    (state, { accessToken }) => ({ ...state, loginUser: false, accessToken, unauthorized: false })
   ),
 
   on(
     Actions.loginUserError,
-    (state) => ({ ...state, loginUser: false, loginUserError: true })
+    (state) => ({ ...state, loginUser: false, unauthorized: true })
   )
 )
 

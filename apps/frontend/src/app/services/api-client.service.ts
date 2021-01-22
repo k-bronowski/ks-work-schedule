@@ -16,8 +16,6 @@ export class ApiClientService {
 
   constructor(private httpClient: HttpClient) { }
 
-
-
   loginUser(username: string, password: string): Observable<LoginUserResult> {
     return this.httpClient.post('/api/login', { username, password }).pipe(
       catchError(err => {

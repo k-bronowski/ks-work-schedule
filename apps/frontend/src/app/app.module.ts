@@ -12,7 +12,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { ServicesModule } from './services/services.module';
 import { Effects } from './store/effects';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,7 +28,9 @@ import { HttpClientModule } from '@angular/common/http';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     ServicesModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -5,5 +5,5 @@ export interface State {
   accessToken: string;
   userProfile: User;
   loginUser: boolean;
-  loginUserError: boolean;
+  unauthorized: boolean;
 }
