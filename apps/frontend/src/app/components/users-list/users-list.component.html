@@ -1,1 +1,27 @@
-<p>users-list works!</p>
+<table style="width: 100%;" mat-table [dataSource]="usersList">
+  <ng-container matColumnDef="index">
+    <th mat-header-cell *matHeaderCellDef>Lp.</th>
+    <td mat-cell *matCellDef="let i = index"> {{i + 1}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="fullName">
+    <th mat-header-cell *matHeaderCellDef>Imię i nazwisko</th>
+    <td mat-cell *matCellDef="let row"> {{row.firstName}}&nbsp;{{row.lastName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="buttons">
+    <th mat-header-cell *matHeaderCellDef style="text-align: right;">
+      <button type="button" mat-icon-button color="primary">
+        <mat-icon svgIcon="account-plus" (click)="addButtonClick.next()"></mat-icon>
+      </button>
+    </th>
+    <td mat-cell *matCellDef="let row" style="text-align: right;">
+      <button type="button" mat-icon-button color="primary" (click)="editButtonClick.next(row.username)">
+        <mat-icon svgIcon="account-edit"></mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

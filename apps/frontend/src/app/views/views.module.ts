@@ -11,6 +11,7 @@ import { AppMaterialModule } from '../app-material/app-material.module';
 import { UsersViewComponent } from './users-view/users-view.component';
 import { EditViewComponent } from './edit-view/edit-view.component';
 import { ProfileViewComponent } from './profile-view/profile-view.component';
+import { UserService } from '../services/user.service';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { ProfileViewComponent } from './profile-view/profile-view.component';
     ComponentsModule,
     FlexLayoutModule,
     AppMaterialModule
-  ]
+  ],
+  providers: [UserService]
 })
 export class ViewsModule { }

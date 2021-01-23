@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
 import { User } from '@ks-work-schedule/models';
 
 @Component({
@@ -7,13 +7,10 @@ import { User } from '@ks-work-schedule/models';
   styleUrls: ['./users-list.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UsersListComponent implements OnInit {
+export class UsersListComponent {
+  displayedColumns = ['index', 'fullName', 'buttons'];
 
   @Input() usersList: User[];
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  @Output() addButtonClick = new EventEmitter<void>();
+  @Output() editButtonClick = new EventEmitter<string>();
 }

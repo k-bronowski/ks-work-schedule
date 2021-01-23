@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { State } from '../../store/state';
-import { }
+import { UserService } from '../../services/user.service';
 
 @Component({
   templateUrl: './users-view.component.html',
@@ -9,9 +7,22 @@ import { }
 })
 export class UsersViewComponent implements OnInit {
 
-  constructor(private store: Store<State>) { }
+  constructor(private userService: UserService) { }
+
+  users$ = this.userService.entities$;
 
   ngOnInit(): void {
+    this.userService.getAll();
   }
+
+  addUser() {
+    alert('add user');
+  }
+
+  editUser(username: string) {
+    alert('edit user: ' + username);
+  }
+
+
 
 }

@@ -17,6 +17,8 @@ import { AuthInterceptor } from './auth.interceptor';
 import { UserDataService } from './services/user-data.service';
 import { State } from './store/state';
 import { loginUserSuccess } from './store/actions';
+import { EntityDataModule } from '@ngrx/data';
+import { entityConfig } from './entity-metadata';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,7 +31,8 @@ import { loginUserSuccess } from './store/actions';
     StoreModule.forRoot({ app: appReducer }, {}),
     EffectsModule.forRoot([Effects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    ServicesModule
+    ServicesModule,
+    EntityDataModule.forRoot(entityConfig)
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
