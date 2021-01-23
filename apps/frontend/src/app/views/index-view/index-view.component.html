@@ -1,5 +1,22 @@
-<p>index-view works!</p>
-{{userProfile$ | async | json}}
-<button mat-raised-button type="Button" (click)="logout()">Wyloguj</button>
-<hr />
+<mat-toolbar>
+  <button type="button" aria-label="Toggle sidenav" mat-icon-button [matMenuTriggerFor]="mainMenu">
+    <mat-icon aria-label="Side nav toggle icon" svgIcon="menu"></mat-icon>
+  </button>
+  <mat-menu #mainMenu="">
+    <button type="button" mat-menu-item routerLink="/edit">Edytuj grafik</button>
+    <button type="button" mat-menu-item routerLink="/users">Zarządzaj uzytkownikami</button>
+  </mat-menu>
+  <span>Grafik pracy</span>
+  <span fxFlex>&nbsp;</span>
+  <button type="button" mat-mini-fab [matMenuTriggerFor]="userMenu"
+    [matTooltip]="'Zalogowany: ' + (userFullName$ | async)" matTooltipPosition="above">{{userInitials$ |
+    async}}</button>
+  <mat-menu #userMenu="matMenu">
+    <!-- <div mat-menu-item>
+      <mat-icon svgIcon="account"></mat-icon>&nbsp;{{userFullName$ | async}}
+    </div> -->
+    <button type="button" mat-menu-item routerLink="/profile">Profil użytkownika</button>
+    <button type="button" mat-menu-item (click)="logout()">Wyloguj</button>
+  </mat-menu>
+</mat-toolbar>
 <router-outlet></router-outlet>

@@ -41,7 +41,5 @@ export class AppModule {
     const accessToken = userDataService.restoreAuthToken();
     if (accessToken)
       this.store.dispatch(loginUserSuccess({ accessToken }))
-    console.error('Dorobić automatyczne logowanie jeśli token jest nieważny....');
-    console.log('token', accessToken);
   }
 }

@@ -6,15 +6,29 @@ import { CalendarViewComponent } from './calendar-view/calendar-view.component';
 import { ComponentsModule } from '../components/components.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { IndexViewComponent } from './index-view/index-view.component';
+import { ServerErrorViewComponent } from './server-error-view/server-error-view.component';
+import { AppMaterialModule } from '../app-material/app-material.module';
+import { UsersViewComponent } from './users-view/users-view.component';
+import { EditViewComponent } from './edit-view/edit-view.component';
+import { ProfileViewComponent } from './profile-view/profile-view.component';
 
 
 @NgModule({
-  declarations: [LoginViewComponent, CalendarViewComponent, IndexViewComponent],
+  declarations: [
+    LoginViewComponent,
+    CalendarViewComponent,
+    IndexViewComponent,
+    ServerErrorViewComponent,
+    UsersViewComponent,
+    EditViewComponent,
+    ProfileViewComponent
+  ],
   imports: [
     CommonModule,
     ViewsRoutingModule,
     ComponentsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    AppMaterialModule
   ]
 })
 export class ViewsModule { }
